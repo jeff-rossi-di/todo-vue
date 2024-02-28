@@ -14,7 +14,7 @@ const buildHeaders = (user: UserSession) => {
   headers.append('Content-Type', 'application/json')
   headers.append('Accept', 'application/json')
   if (user.Token) {
-    headers.append('Authorization', `bearer ${user.Token}`)
+    headers.append('Authorization', `Bearer ${user.Token}`)
   }
   return headers
 }

@@ -21,7 +21,7 @@ const updateTask = () => {}
 <template>
   <div :class="toDoClass">
     <div>
-      <v-checkbox v-model="state.todo.Completed" @change="completedChanged"></v-checkbox>
+      <v-checkbox v-model="state.todo.Completed" @change="completedChanged" label=""></v-checkbox>
     </div>
     <div>
       <div v-if="state.editing">
