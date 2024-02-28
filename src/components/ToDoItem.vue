@@ -29,14 +29,14 @@ const updateTask = () => {
 </script>
 
 <template>
-  <div :class="toDoClass">
-    <div>
+  <div :class="toDoClass()">
+    <div style="margin-right: 1em">
       <v-checkbox v-model="state.todo.Completed" @change="completedChanged" label=""></v-checkbox>
     </div>
-    <div>
+    <div style="flex: 1">
       <div v-if="state.editing">
         <v-textarea label="Task" v-model="state.todo.Task"></v-textarea>
-        <div>
+        <div class="edit-buttons">
           <button @click="toggleEditing">Cancel</button>
           <button @click="updateTask">Update</button>
         </div>
@@ -47,3 +47,17 @@ const updateTask = () => {
     </div>
   </div>
 </template>
+
+<style>
+.to-do-item {
+  display: flex;
+  padding: 0.5em;
+}
+.alternate {
+  background-color: silver;
+}
+.edit-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+</style>
