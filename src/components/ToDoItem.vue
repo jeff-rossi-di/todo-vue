@@ -4,6 +4,7 @@ import { reactive } from 'vue'
 
 const props = defineProps<{ todo: ToDo; index: number }>()
 const state = reactive({ todo: props.todo, editing: false })
+const emits = defineEmits(['completedChanged', 'updateTask'])
 
 const toDoClass = () => {
   return props.index % 2 ? 'to-do-item alternate' : 'to-do-item'
@@ -13,9 +14,18 @@ const toggleEditing = () => {
   state.editing = !state.editing
 }
 
-const completedChanged = () => {}
+const completedChanged = () => {
+  const { Id } = props.todo
+  const { Completed } = state.todo
+  emits('completedChanged', { Id, Completed })
+}
 
-const updateTask = () => {}
+const updateTask = () => {
+  const { Id } = props.todo
+  const { Task } = state.todo
+  emits('updateTask', { Id, Task })
+  toggleEditing()
+}
 </script>
 
 <template>
@@ -31,7 +41,7 @@ const updateTask = () => {}
           <button @click="updateTask">Update</button>
         </div>
       </div>
-      <div v-if="!state.editing" @dblclick="toggleEditing">
+      <div v-if="!state.editing" @dblclick="toggleEditing" style="cursor: pointer">
         {{ props.todo.Task }}
       </div>
     </div>

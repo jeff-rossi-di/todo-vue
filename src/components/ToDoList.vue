@@ -33,6 +33,14 @@ const loadToDos = async () => {
   }
 }
 
+const updateTask = (ev: { Id: number; Completed: boolean }) => {
+  console.log(ev)
+}
+
+const completedChanged = (ev: { Id: number; Task: string }) => {
+  console.log(ev)
+}
+
 onMounted(async () => {
   await loadToDos()
 })
@@ -41,6 +49,13 @@ onMounted(async () => {
 <template>
   <div class="to-do-list">
     <p>Double Click on ToDo text to edit</p>
-    <ToDoItem v-for="(todo, index) of todos" :todo="todo" :key="todo.Id" :index="index" />
+    <ToDoItem
+      v-for="(todo, index) of todos"
+      :todo="todo"
+      :key="todo.Id"
+      :index="index"
+      @completed-changed="completedChanged"
+      @update-task="updateTask"
+    />
   </div>
 </template>
