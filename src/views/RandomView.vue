@@ -47,7 +47,7 @@ onMounted(async () => {
 
 <template>
   <div class="random">
-    <h1>This is a random login page</h1>
+    <h1>Random Sign In</h1>
     <p>
       A series of users was randomly generated along with random ToDos for each. You may sign in as
       one of those random users with the form below.

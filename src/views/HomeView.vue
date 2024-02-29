@@ -7,7 +7,6 @@ const session = useUserStore()
 
 <template>
   <div class="home">
-    <h1>This is a home page</h1>
     <WelcomeMessage v-if="!session.user.SignedIn" />
     <ToDoList v-if="session.user.SignedIn" :user="session.user" />
   </div>

@@ -23,7 +23,7 @@ const register = async () => {
 
 <template>
   <div class="register">
-    <h1>This is a register page</h1>
+    <h1>Register</h1>
     <form onsubmit="return false">
       <div>
         <v-text-field

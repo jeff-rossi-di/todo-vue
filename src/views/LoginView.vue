@@ -27,7 +27,7 @@ const signIn = async () => {
 </script>
 <template>
   <div class="login">
-    <h1>This is an login page</h1>
+    <h1>Sign In</h1>
   </div>
   <form onsubmit="return false">
     <div>
