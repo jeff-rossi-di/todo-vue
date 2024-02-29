@@ -76,6 +76,15 @@ const addToDo = async (ev: { Task: string; Completed: boolean }) => {
   if (result.ok) loadToDos()
 }
 
+const deleteToDo = async (ev: { Id: number }) => {
+  const { Id } = ev
+  const result = await fetch(`${apiBaseUrl}/todo/${Id}`, {
+    method: 'DELETE',
+    headers: buildHeaders(props.user)
+  })
+  if (result.ok) loadToDos()
+}
+
 onMounted(async () => {
   await loadToDos()
 })
@@ -92,6 +101,7 @@ onMounted(async () => {
       :index="index"
       @completed-changed="completedChanged"
       @update-task="updateTask"
+      @delete-to-do="deleteToDo"
     />
   </div>
 </template>
