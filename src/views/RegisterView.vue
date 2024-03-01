@@ -49,7 +49,7 @@ const register = async () => {
         ></v-text-field>
       </div>
       <div>
-        <button @click="register">Register</button>
+        <v-btn @click="register">Register</v-btn>
       </div>
     </form>
   </div>

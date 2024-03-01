@@ -47,7 +47,7 @@ const signIn = async () => {
     </div>
 
     <div>
-      <button @click="signIn">Sign In</button>
+      <v-btn @click="signIn">Sign In</v-btn>
     </div>
   </form>
 </template>
