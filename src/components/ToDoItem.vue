@@ -35,7 +35,7 @@ const deleteToDo = () => {
 
 <template>
   <div :class="toDoClass()">
-    <div style="margin-right: 1em">
+    <div class="mr-4">
       <v-checkbox v-model="state.todo.Completed" @change="completedChanged" label=""></v-checkbox>
     </div>
     <div style="flex: 1">
@@ -46,11 +46,16 @@ const deleteToDo = () => {
           <button @click="updateTask">Update</button>
         </div>
       </div>
-      <div v-if="!state.editing" @dblclick="toggleEditing" style="cursor: pointer">
+      <div
+        v-if="!state.editing"
+        @dblclick="toggleEditing"
+        style="cursor: pointer"
+        title="Double click to edit"
+      >
         {{ props.todo.Task }}
       </div>
     </div>
-    <div style="margin-left: 1em">
+    <div class="ml-4">
       <button @click="deleteToDo">Delete</button>
     </div>
   </div>
