@@ -57,7 +57,7 @@ onMounted(async () => {
         <v-select label="UserName" :items="state.userNames" v-model="state.UserName"></v-select>
       </div>
       <div>
-        <button @click="signIn">Sign In</button>
+        <v-btn @click="signIn">Sign In</v-btn>
       </div>
     </form>
   </div>

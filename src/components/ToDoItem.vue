@@ -39,11 +39,11 @@ const deleteToDo = () => {
       <v-checkbox v-model="state.todo.Completed" @change="completedChanged" label=""></v-checkbox>
     </div>
     <div style="flex: 1">
-      <div v-if="state.editing">
+      <div v-if="state.editing" class="editing-box">
         <v-textarea label="Task" v-model="state.todo.Task"></v-textarea>
-        <div class="edit-buttons">
-          <button @click="toggleEditing">Cancel</button>
-          <button @click="updateTask">Update</button>
+        <div class="edit-v-btns">
+          <v-btn @click="toggleEditing">Cancel</v-btn>
+          <v-btn @click="updateTask">Update</v-btn>
         </div>
       </div>
       <div
@@ -56,7 +56,7 @@ const deleteToDo = () => {
       </div>
     </div>
     <div class="ml-4">
-      <button @click="deleteToDo">Delete</button>
+      <v-btn @click="deleteToDo">Delete</v-btn>
     </div>
   </div>
 </template>
@@ -69,8 +69,11 @@ const deleteToDo = () => {
 .alternate {
   background-color: silver;
 }
-.edit-buttons {
+.edit-v-btns {
   display: flex;
   justify-content: space-between;
+}
+.editing-box {
+  @apply border-2 border-black p-4;
 }
 </style>

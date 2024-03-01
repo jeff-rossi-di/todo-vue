@@ -18,7 +18,7 @@ const signOut = () => {
       <RouterLink to="/random" v-if="!session.user.SignedIn">Random</RouterLink>
       <div v-if="session.user.SignedIn">
         <strong class="mr-2">{{ session.user.UserName }}</strong>
-        <button @click="signOut">Sign Out</button>
+        <v-btn @click="signOut">Sign Out</v-btn>
       </div>
     </nav>
   </header>

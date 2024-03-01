@@ -17,27 +17,30 @@ const addToDo = () => {
 
 <template>
   <div class="new-to-to">
-    <div v-if="state.editing">
+    <div v-if="state.editing" class="editing-box">
       <div>
         <v-textarea label="Task" v-model="state.todo.Task"></v-textarea>
       </div>
       <div>
         <v-checkbox v-model="state.todo.Completed" label="Completed"></v-checkbox>
       </div>
-      <div class="new-todo-buttons">
-        <button @click="toggleEditing">Cancel</button>
-        <button @click="addToDo">Add ToDo</button>
+      <div class="new-todo-v-btns">
+        <v-btn @click="toggleEditing">Cancel</v-btn>
+        <v-btn @click="addToDo">Add ToDo</v-btn>
       </div>
     </div>
     <div v-if="!state.editing">
-      <button @click="toggleEditing">New ToDo</button>
+      <v-btn @click="toggleEditing">New ToDo</v-btn>
     </div>
   </div>
 </template>
 
 <style>
-.new-todo-buttons {
+.new-todo-v-btns {
   display: flex;
   justify-content: space-between;
+}
+.editing-box {
+  @apply border-2 border-black p-4;
 }
 </style>
