@@ -17,7 +17,7 @@ const addToDo = () => {
 
 <template>
   <div class="new-to-to">
-    <div v-if="state.editing">
+    <div v-if="state.editing" class="editing-box">
       <div>
         <v-textarea label="Task" v-model="state.todo.Task"></v-textarea>
       </div>
@@ -39,5 +39,8 @@ const addToDo = () => {
 .new-todo-v-btns {
   display: flex;
   justify-content: space-between;
+}
+.editing-box {
+  @apply border-2 border-black p-4;
 }
 </style>

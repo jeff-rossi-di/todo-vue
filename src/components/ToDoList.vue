@@ -91,9 +91,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="to-do-list">
+  <div class="to-do-list" title="Double Click on ToDo text to edit">
     <NewToDo @add-to-do="addToDo" />
-    <p>Double Click on ToDo text to edit</p>
     <ToDoItem
       v-for="(todo, index) of todos"
       :todo="todo"

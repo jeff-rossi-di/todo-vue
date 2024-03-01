@@ -39,7 +39,7 @@ const deleteToDo = () => {
       <v-checkbox v-model="state.todo.Completed" @change="completedChanged" label=""></v-checkbox>
     </div>
     <div style="flex: 1">
-      <div v-if="state.editing">
+      <div v-if="state.editing" class="editing-box">
         <v-textarea label="Task" v-model="state.todo.Task"></v-textarea>
         <div class="edit-v-btns">
           <v-btn @click="toggleEditing">Cancel</v-btn>
@@ -72,5 +72,8 @@ const deleteToDo = () => {
 .edit-v-btns {
   display: flex;
   justify-content: space-between;
+}
+.editing-box {
+  @apply border-2 border-black p-4;
 }
 </style>
