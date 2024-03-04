@@ -34,16 +34,25 @@ const deleteToDo = () => {
 </script>
 
 <template>
-  <div :class="toDoClass()">
+  <div :class="toDoClass()" :id="`to-do-${props.todo.Id}`">
     <div class="mr-4">
-      <v-checkbox v-model="state.todo.Completed" @change="completedChanged" label=""></v-checkbox>
+      <v-checkbox
+        v-model="state.todo.Completed"
+        @change="completedChanged"
+        label=""
+        :id="`completed-${props.todo.Id}`"
+      ></v-checkbox>
     </div>
     <div style="flex: 1">
       <div v-if="state.editing" class="editing-box">
-        <v-textarea label="Task" v-model="state.todo.Task"></v-textarea>
+        <v-textarea
+          label="Task"
+          v-model="state.todo.Task"
+          :id="`task-${props.todo.Id}`"
+        ></v-textarea>
         <div class="edit-v-btns">
-          <v-btn @click="toggleEditing">Cancel</v-btn>
-          <v-btn @click="updateTask">Update</v-btn>
+          <v-btn @click="toggleEditing" :id="`cancel-to-do-${props.todo.Id}`">Cancel</v-btn>
+          <v-btn @click="updateTask" :id="`update-to-do-${props.todo.Id}`">Update</v-btn>
         </div>
       </div>
       <div
@@ -51,12 +60,13 @@ const deleteToDo = () => {
         @dblclick="toggleEditing"
         style="cursor: pointer"
         title="Double click to edit"
+        :id="`dbl-click-${props.todo.Id}`"
       >
         {{ props.todo.Task }}
       </div>
     </div>
     <div class="ml-4">
-      <v-btn @click="deleteToDo">Delete</v-btn>
+      <v-btn @click="deleteToDo" :id="`delete-to-do-${props.todo.Id}`">Delete</v-btn>
     </div>
   </div>
 </template>
