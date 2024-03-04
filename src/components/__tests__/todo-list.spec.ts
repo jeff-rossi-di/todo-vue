@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeAll, vi, afterAll } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import ToDoList from '../ToDoList.vue'
 import NewToDo from '../NewToDo.vue'
-// import ToDoItem from '../ToDoItem.vue'
-import {  type UserSession } from '@/stores/user'
+import ToDoItem from '../ToDoItem.vue'
+import { BlankUserSession, type UserSession } from '@/stores/user'
 
 const mockLoadTodosResponse = {
   ok: true,
@@ -41,16 +41,15 @@ describe('ToDo List', () => {
     global.fetch = orginalFetch
   })
   it('Should contain a NewToDo component', () => {
-    const wrapper = mount(ToDoList, { props: { user: sampleUser } })
+    const wrapper = mount(ToDoList, { props: { user: BlankUserSession } })
     const newToDo = wrapper.findComponent(NewToDo)
     expect(newToDo.exists()).toBe(true)
   })
-  // does not work
-  /*
-  it('Should render ToDoItem after loadToDos', () => {
+  it('Should render ToDoItem after loadToDos', async () => {
     const wrapper = mount(ToDoList, { props: { user: sampleUser } })
+    await flushPromises()
+    await wrapper.vm.$nextTick()
     const item = wrapper.findComponent(ToDoItem)
-    console.log(item)
+    expect(item.exists()).toBe(true)
   })
-  */
 })
