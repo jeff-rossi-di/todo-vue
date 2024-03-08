@@ -5,6 +5,6 @@
   "Version": 1,
   "IsDeleted": false,
   "UserName": "CypressTestUser",
-  "Email": "test.user@example.com",
+  "Email": "cypress.test@example.com",
   "Random": false
 }

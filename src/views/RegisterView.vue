@@ -33,6 +33,7 @@ const register = async () => {
           label="User Name"
           placeholder="Enter User Name"
           v-model="state.UserName"
+          data-cy="user-name-input"
         ></v-text-field>
       </div>
       <div>
@@ -41,6 +42,7 @@ const register = async () => {
           type="password"
           placeholder="Enter PassWord"
           v-model="state.PassWord"
+          data-cy="pass-word-input"
         ></v-text-field>
       </div>
       <div>
@@ -49,10 +51,11 @@ const register = async () => {
           type="email"
           placeholder="Enter Email"
           v-model="state.Email"
+          data-cy="email-input"
         ></v-text-field>
       </div>
       <div>
-        <v-btn @click="register">Register</v-btn>
+        <v-btn @click="register" data-cy="register-button">Register</v-btn>
       </div>
     </form>
   </div>
