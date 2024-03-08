@@ -1,0 +1,10 @@
+{
+  "Id": "1234",
+  "Created": "2024-02-28T14:18:39.000Z",
+  "Updated": "2024-02-28T14:18:39.000Z",
+  "Version": 1,
+  "IsDeleted": false,
+  "UserName": "CypressTestUser",
+  "Email": "test.user@example.com",
+  "Random": false
+}

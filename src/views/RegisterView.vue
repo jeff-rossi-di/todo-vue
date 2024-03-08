@@ -16,7 +16,10 @@ const register = async () => {
     }
   })
   if (result.ok) {
-    router.push('/login')
+    const failure = await router.push('/login')
+    if (failure) console.log(failure)
+  } else {
+    alert('Unable to register')
   }
 }
 </script>
