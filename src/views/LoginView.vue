@@ -21,7 +21,10 @@ const signIn = async () => {
     const json = await result.json()
     const { Token } = json
     session.login({ UserName, Token, SignedIn: true })
-    router.push('/')
+    const failure = await router.push('/') // no idea why this < 100%
+    if (failure) console.log(failure)
+  } else {
+    alert('Unable to sign in')
   }
 }
 </script>
@@ -35,6 +38,7 @@ const signIn = async () => {
         label="User Name"
         placeholder="Enter User Name"
         v-model="state.UserName"
+        data-cy="user-name-input"
       ></v-text-field>
     </div>
     <div>
@@ -43,11 +47,12 @@ const signIn = async () => {
         type="password"
         placeholder="Enter PassWord"
         v-model="state.PassWord"
+        data-cy="pass-word-input"
       ></v-text-field>
     </div>
 
     <div>
-      <v-btn @click="signIn">Sign In</v-btn>
+      <v-btn @click="signIn" data-cy="sign-in-button">Sign In</v-btn>
     </div>
   </form>
 </template>

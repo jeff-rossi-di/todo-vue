@@ -28,7 +28,9 @@ const loadToDos = async () => {
     headers: buildHeaders(props.user)
   })
   if (result.ok) {
-    state.todos = await result.json()
+    const todos = await result.json()
+    console.log(todos)
+    state.todos = todos
   } else {
     console.log(result)
   }

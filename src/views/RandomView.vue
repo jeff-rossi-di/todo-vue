@@ -13,9 +13,10 @@ const loadUsers = async () => {
   const result = await fetch(`${apiBaseUrl}/user`)
   if (result.ok) {
     const users = await result.json()
+    console.log(users)
     const un: string[] = []
     for (const user of users) {
-      un.push(user.UserName)
+      if (user.Random) un.push(user.UserName)
     }
     state.userNames = un.sort()
   }
@@ -34,9 +35,13 @@ const signIn = async () => {
   })
   if (result.ok) {
     const json = await result.json()
+    console.log(json)
     const { Token } = json
     session.login({ UserName, Token, SignedIn: true })
-    router.push('/')
+    const failure = await router.push('/') // no idea why this < 100%
+    if (failure) console.log(failure)
+  } else {
+    alert('Unable to Sign in')
   }
 }
 
@@ -54,10 +59,15 @@ onMounted(async () => {
     </p>
     <form onsubmit="return false">
       <div>
-        <v-select label="UserName" :items="state.userNames" v-model="state.UserName"></v-select>
+        <v-select
+          data-cy="user-select"
+          label="UserName"
+          :items="state.userNames"
+          v-model="state.UserName"
+        ></v-select>
       </div>
       <div>
-        <v-btn @click="signIn">Sign In</v-btn>
+        <v-btn data-cy="sign-in-button" @click="signIn">Sign In</v-btn>
       </div>
     </form>
   </div>
