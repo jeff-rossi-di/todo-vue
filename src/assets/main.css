@@ -8,12 +8,25 @@ body {
   padding: 0;
 }
 
+#wrapper {
+  @apply my-0 w-[80%] mx-auto flex flex-col h-screen max-h-screen;
+}
+
+header,
+footer {
+  @apply px-0 py-4;
+}
+
+#main {
+  @apply flex-grow overflow-y-auto;
+}
+
 h1 {
   @apply text-2xl font-bold mb-2;
 }
 
 h2 {
-  @apply text-xl font-bold;
+  @apply text-xl font-bold mb-2;
 }
 
 a {
