@@ -7,7 +7,7 @@ const state = reactive({ todo: props.todo, editing: false })
 const emits = defineEmits(['completedChanged', 'updateTask', 'deleteToDo'])
 
 const toDoClass = () => {
-  return props.index % 2 ? 'to-do-item alternate' : 'to-do-item'
+  return props.index % 2 ? 'to-do-item' : 'to-do-item alternate'
 }
 
 const toggleEditing = () => {
@@ -70,20 +70,3 @@ const deleteToDo = () => {
     </div>
   </div>
 </template>
-
-<style>
-.to-do-item {
-  display: flex;
-  padding: 0.5em;
-}
-.alternate {
-  background-color: silver;
-}
-.edit-v-btns {
-  display: flex;
-  justify-content: space-between;
-}
-.editing-box {
-  @apply border-2 border-black p-4;
-}
-</style>

@@ -4,8 +4,7 @@
 
 html,
 body {
-  margin: 0;
-  padding: 0;
+  @apply m-0 p-0 bg-light text-dark;
 }
 
 #wrapper {
@@ -17,12 +16,16 @@ footer {
   @apply px-0 py-4;
 }
 
+nav {
+  @apply flex justify-between;
+}
+
 #main {
   @apply flex-grow overflow-y-auto;
 }
 
 h1 {
-  @apply text-2xl font-bold mb-2;
+  @apply text-2xl font-bold mb-2 text-alt-dark;
 }
 
 h2 {
@@ -30,9 +33,47 @@ h2 {
 }
 
 a {
-  @apply font-bold text-blue-500;
+  @apply font-bold text-alt-dark;
 }
 
 a:hover {
   @apply underline;
+}
+
+.new-to-do {
+  @apply mb-2;
+}
+
+.new-todo-v-btns,
+.edit-v-btns {
+  @apply flex justify-between;
+}
+
+.editing-box {
+  @apply border-2 border-dark p-4 rounded;
+}
+
+.to-do-item {
+  @apply flex p-2;
+}
+
+.alternate {
+  @apply bg-alt-light rounded;
+}
+
+.dark {
+  @apply bg-dark text-light;
+}
+
+.dark .alternate {
+  @apply text-alt-dark;
+}
+
+.dark .editing-box {
+  @apply border-light;
+}
+
+.dark a,
+.dark h1 {
+  @apply text-alt-light;
 }

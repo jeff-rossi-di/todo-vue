@@ -60,5 +60,3 @@ const register = async () => {
     </form>
   </div>
 </template>
-
-<style></style>

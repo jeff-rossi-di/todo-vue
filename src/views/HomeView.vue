@@ -11,5 +11,3 @@ const session = useUserStore()
     <ToDoList v-if="session.user.SignedIn" :user="session.user" />
   </div>
 </template>
-
-<style></style>

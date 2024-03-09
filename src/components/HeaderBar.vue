@@ -23,10 +23,3 @@ const signOut = () => {
     </nav>
   </header>
 </template>
-
-<style>
-nav {
-  display: flex;
-  justify-content: space-between;
-}
-</style>

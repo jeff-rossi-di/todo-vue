@@ -72,5 +72,3 @@ onMounted(async () => {
     </form>
   </div>
 </template>
-
-<style></style>
