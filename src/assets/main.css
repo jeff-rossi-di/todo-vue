@@ -24,12 +24,20 @@ nav {
   @apply flex-grow overflow-y-auto;
 }
 
+.text-shadow {
+  text-shadow: 1px 1px 3px #222;
+}
+
+.dark .text-shadow {
+  text-shadow: 1px 1px 3px #ddd;
+}
+
 h1 {
-  @apply text-2xl font-bold mb-2 text-alt-dark;
+  @apply text-2xl font-bold mb-2 text-alt-dark text-shadow;
 }
 
 h2 {
-  @apply text-xl font-bold mb-2;
+  @apply text-xl font-bold mb-2 text-shadow;
 }
 
 a {
@@ -50,7 +58,7 @@ a:hover {
 }
 
 .editing-box {
-  @apply border-2 border-dark p-4 rounded;
+  @apply border-2 border-dark p-4 rounded bg-alt-light;
 }
 
 .to-do-item {
@@ -59,6 +67,10 @@ a:hover {
 
 .alternate {
   @apply bg-alt-light rounded;
+}
+
+.alternate .editing-box {
+  @apply bg-light;
 }
 
 .dark {
@@ -70,7 +82,11 @@ a:hover {
 }
 
 .dark .editing-box {
-  @apply border-light;
+  @apply border-light bg-alt-dark;
+}
+
+.dark .alternate .editing-box {
+  @apply bg-dark;
 }
 
 .dark a,
