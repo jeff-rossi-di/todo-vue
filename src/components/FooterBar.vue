@@ -36,5 +36,14 @@ const darkChanged = () => {
       ></v-select>
       <v-checkbox label="Dark" v-model="state.dark" @change="darkChanged"></v-checkbox>
     </div>
+    <div class="attribution">
+      Color palettes selected from
+      <a
+        href="https://www.canva.com/colors/color-palettes/"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Canva</a
+      >
+    </div>
   </footer>
 </template>

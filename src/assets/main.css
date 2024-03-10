@@ -8,12 +8,12 @@ body {
 }
 
 #wrapper {
-  @apply my-0 w-[80%] mx-auto flex flex-col h-screen max-h-screen;
+  @apply my-0 sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[55%] 2xl:w-[50%] mx-auto flex flex-col h-screen max-h-screen;
 }
 
 header,
 footer {
-  @apply px-0 py-4;
+  @apply p-2;
 }
 
 nav {
@@ -21,7 +21,7 @@ nav {
 }
 
 #main {
-  @apply flex-grow overflow-y-auto;
+  @apply px-2 flex-grow overflow-y-auto;
 }
 
 .text-shadow {
@@ -92,4 +92,8 @@ a:hover {
 .dark a,
 .dark h1 {
   @apply text-alt-light;
+}
+
+.attribution {
+  @apply text-sm min-h-fit mb-2;
 }
