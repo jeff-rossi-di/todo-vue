@@ -56,5 +56,3 @@ const signIn = async () => {
     </div>
   </form>
 </template>
-
-<style></style>

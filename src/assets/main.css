@@ -4,22 +4,96 @@
 
 html,
 body {
-  margin: 0;
-  padding: 0;
+  @apply m-0 p-0 bg-light text-dark;
+}
+
+#wrapper {
+  @apply my-0 sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[55%] 2xl:w-[50%] mx-auto flex flex-col h-screen max-h-screen;
+}
+
+header,
+footer {
+  @apply p-2;
+}
+
+nav {
+  @apply flex justify-between;
+}
+
+#main {
+  @apply px-2 flex-grow overflow-y-auto;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 3px #222;
+}
+
+.dark .text-shadow {
+  text-shadow: 1px 1px 3px #ddd;
 }
 
 h1 {
-  @apply text-2xl font-bold mb-2;
+  @apply text-2xl font-bold mb-2 text-alt-dark text-shadow;
 }
 
 h2 {
-  @apply text-xl font-bold;
+  @apply text-xl font-bold mb-2 text-shadow;
 }
 
 a {
-  @apply font-bold text-blue-500;
+  @apply font-bold text-alt-dark;
 }
 
 a:hover {
   @apply underline;
+}
+
+.new-to-do {
+  @apply mb-2;
+}
+
+.new-todo-v-btns,
+.edit-v-btns {
+  @apply flex justify-between;
+}
+
+.editing-box {
+  @apply border-2 border-dark p-4 rounded bg-alt-light;
+}
+
+.to-do-item {
+  @apply flex p-2;
+}
+
+.alternate {
+  @apply bg-alt-light rounded;
+}
+
+.alternate .editing-box {
+  @apply bg-light;
+}
+
+.dark {
+  @apply bg-dark text-light;
+}
+
+.dark .alternate {
+  @apply text-alt-dark;
+}
+
+.dark .editing-box {
+  @apply border-light bg-alt-dark;
+}
+
+.dark .alternate .editing-box {
+  @apply bg-dark;
+}
+
+.dark a,
+.dark h1 {
+  @apply text-alt-light;
+}
+
+.attribution {
+  @apply text-sm min-h-fit mb-2;
 }
