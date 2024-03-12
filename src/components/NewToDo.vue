@@ -13,13 +13,24 @@ const addToDo = () => {
   emits('addToDo', { Task, Completed })
   toggleEditing()
 }
+
+const rules = {
+  task: (v: string) => {
+    return !!v || 'Task is required'
+  }
+}
 </script>
 
 <template>
   <div class="new-to-do">
     <div v-if="state.editing" class="editing-box">
       <div>
-        <v-textarea label="Task" id="new-to-do-task" v-model="state.todo.Task"></v-textarea>
+        <v-textarea
+          label="Task"
+          id="new-to-do-task"
+          v-model="state.todo.Task"
+          :rules="[rules.task]"
+        ></v-textarea>
       </div>
       <div>
         <v-checkbox

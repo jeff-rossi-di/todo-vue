@@ -3,7 +3,7 @@ import type { ToDo } from '@/constants'
 import { reactive } from 'vue'
 
 const props = defineProps<{ todo: ToDo; index: number }>()
-const state = reactive({ todo: props.todo, editing: false })
+const state = reactive({ todo: JSON.parse(JSON.stringify(props.todo)), editing: false })
 const emits = defineEmits(['completedChanged', 'updateTask', 'deleteToDo'])
 
 const toDoClass = () => {
@@ -31,6 +31,17 @@ const deleteToDo = () => {
   const { Id } = props.todo
   emits('deleteToDo', { Id })
 }
+
+const cancelEdit = () => {
+  state.todo.Task = props.todo.Task
+  toggleEditing()
+}
+
+const rules = {
+  task: (v: string) => {
+    return !!v || 'Task is required'
+  }
+}
 </script>
 
 <template>
@@ -49,9 +60,10 @@ const deleteToDo = () => {
           label="Task"
           v-model="state.todo.Task"
           :id="`task-${props.todo.Id}`"
+          :rules="[rules.task]"
         ></v-textarea>
         <div class="edit-v-btns">
-          <v-btn @click="toggleEditing" :id="`cancel-to-do-${props.todo.Id}`">Cancel</v-btn>
+          <v-btn @click="cancelEdit" :id="`cancel-to-do-${props.todo.Id}`">Cancel</v-btn>
           <v-btn @click="updateTask" :id="`update-to-do-${props.todo.Id}`">Update</v-btn>
         </div>
       </div>
