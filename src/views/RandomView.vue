@@ -45,6 +45,12 @@ const signIn = async () => {
   }
 }
 
+const rules = {
+  userName: (v: string) => {
+    return !!v || 'User Name is required'
+  }
+}
+
 onMounted(async () => {
   await loadUsers()
 })
@@ -57,18 +63,19 @@ onMounted(async () => {
       A series of users was randomly generated along with random ToDos for each. You may sign in as
       one of those random users with the form below.
     </p>
-    <form onsubmit="return false">
+    <v-form @submit.prevent>
       <div>
         <v-select
           data-cy="user-select"
           label="UserName"
           :items="state.userNames"
           v-model="state.UserName"
+          :rules="[rules.userName]"
         ></v-select>
       </div>
       <div>
         <v-btn data-cy="sign-in-button" @click="signIn">Sign In</v-btn>
       </div>
-    </form>
+    </v-form>
   </div>
 </template>
