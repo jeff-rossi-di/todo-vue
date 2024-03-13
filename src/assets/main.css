@@ -48,6 +48,10 @@ a:hover {
   @apply underline;
 }
 
+p {
+  @apply mb-2;
+}
+
 .new-to-do {
   @apply mb-2;
 }
@@ -78,7 +82,7 @@ a:hover {
 }
 
 .dark .alternate {
-  @apply text-alt-dark;
+  @apply bg-alt-dark;
 }
 
 .dark .editing-box {
