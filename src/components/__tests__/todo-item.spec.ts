@@ -14,8 +14,8 @@ describe('ToDo Item', () => {
     Version: '1',
     UserId: 123
   }
-  it('Should have class "alternate" when index is odd', () => {
-    const wrapper = mount(ToDoItem, { props: { todo: todo, index: 1 } })
+  it('Should have class "alternate" when index is even', () => {
+    const wrapper = mount(ToDoItem, { props: { todo: todo, index: 2 } })
     expect(wrapper.classes()).toContain('alternate')
   })
   it('Should show textarea when task text div is double clicked', async () => {
