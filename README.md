@@ -61,6 +61,12 @@ npm run build
 npm run test:e2e
 ```
 
+### Workshop UI Components with [StoryBook](https://storybook.js.org/)
+
+```sh
+npm run storybook
+```
+
 ### Lint with [ESLint](https://eslint.org/)
 
 ```sh
