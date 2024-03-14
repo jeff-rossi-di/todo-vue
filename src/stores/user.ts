@@ -13,6 +13,12 @@ export const BlankUserSession: UserSession = {
   SignedIn: false
 }
 
+export const testUser: UserSession = {
+  UserName: 'TestUser',
+  Token: 'asdfghjkl',
+  SignedIn: true
+}
+
 export const useUserStore = defineStore('user', () => {
   const user = ref(BlankUserSession)
   const login = (newUser: UserSession) => {

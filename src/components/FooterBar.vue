@@ -5,7 +5,6 @@ import { paletteNames } from '../palettes'
 const state = reactive({ palette: paletteNames[0], dark: false })
 
 const paletteChanged = () => {
-  console.log(state)
   const body = document.body
   if (body) {
     body.setAttribute('data-theme', state.palette)
@@ -13,7 +12,6 @@ const paletteChanged = () => {
 }
 
 const darkChanged = () => {
-  console.log(state)
   const body = document.body
   if (body) {
     if (state.dark) {
