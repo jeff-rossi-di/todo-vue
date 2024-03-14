@@ -6,7 +6,6 @@ import { createPinia } from 'pinia'
 import router from '../src/router'
 
 // Vuetify
-import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
@@ -24,6 +23,9 @@ setup((app: App) => {
   app.use(router)
 })
 
+
+import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
 import '../src/assets/main.css'
 
 const preview: Preview = {
@@ -33,7 +35,7 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/i
       }
-    },
+    }
   }
 }
 
