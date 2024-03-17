@@ -1,25 +1,20 @@
 <script setup lang="ts">
-import { apiBaseUrl } from '@/constants'
+import { ToDoApi } from '@/lib/todo-api.class'
 import router from '@/router'
 import { reactive } from 'vue'
 
 const state = reactive({ UserName: '', PassWord: '', Email: ' ' })
+const api = new ToDoApi()
 
 const register = async () => {
   const { UserName, PassWord, Email } = state
   if (!UserName || !PassWord) return
-  const result = await fetch(`${apiBaseUrl}/auth/register`, {
-    method: 'POST',
-    body: JSON.stringify({ UserName, PassWord, Email }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  if (result.ok) {
+  try {
+    await api.register(UserName, PassWord, Email)
     const failure = await router.push('/login')
     if (failure) console.log(failure)
-  } else {
-    alert('Unable to register')
+  } catch (error) {
+    alert('unable to register')
   }
 }
 

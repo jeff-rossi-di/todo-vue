@@ -1,29 +1,23 @@
 <script setup lang="ts">
-import { apiBaseUrl } from '@/constants'
+import { ToDoApi } from '@/lib/todo-api.class'
 import router from '@/router'
 import { useUserStore } from '@/stores/user'
 import { reactive } from 'vue'
 
 const state = reactive({ UserName: '', PassWord: '' })
 const session = useUserStore()
+const api = new ToDoApi()
 
 const signIn = async () => {
   const { UserName, PassWord } = state
   if (!UserName || !PassWord) return
-  const result = await fetch(`${apiBaseUrl}/auth/login`, {
-    method: 'POST',
-    body: JSON.stringify({ UserName, PassWord }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  if (result.ok) {
-    const json = await result.json()
-    const { Token } = json
+  try {
+    const result = await api.login(UserName, PassWord)
+    const { Token } = result
     session.login({ UserName, Token, SignedIn: true })
     const failure = await router.push('/') // no idea why this < 100%
     if (failure) console.log(failure)
-  } else {
+  } catch (error) {
     alert('Unable to sign in')
   }
 }

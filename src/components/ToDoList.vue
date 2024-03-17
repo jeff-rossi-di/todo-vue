@@ -1,38 +1,24 @@
 <script setup lang="ts">
-import { apiBaseUrl, type ToDo } from '@/constants'
+import { type ToDo } from '@/constants'
 import type { UserSession } from '@/stores/user'
 import { reactive, ref } from 'vue'
 import { onMounted } from 'vue'
 import ToDoItem from './ToDoItem.vue'
 import NewToDo from './NewToDo.vue'
+import { ToDoApi } from '@/lib/todo-api.class'
 
 const props = defineProps<{ user: UserSession }>()
 const todos = ref<ToDo[]>([])
 const state = reactive({ todos })
-
-const buildHeaders = (user: UserSession) => {
-  const headers: Headers = new Headers()
-  headers.append('Content-Type', 'application/json')
-  headers.append('Accept', 'application/json')
-  if (user.Token) {
-    headers.append('Authorization', `Bearer ${user.Token}`)
-  }
-  return headers
-}
+const api = new ToDoApi()
 
 const loadToDos = async () => {
   const { Token } = props.user
   if (!Token) return
-  const result = await fetch(`${apiBaseUrl}/todo`, {
-    method: 'GET',
-    headers: buildHeaders(props.user)
-  })
-  if (result.ok) {
-    const todos = await result.json()
-    console.log(todos)
-    state.todos = todos
-  } else {
-    console.log(result)
+  try {
+    state.todos = await api.toDoLoad(props.user)
+  } catch (error) {
+    alert('Unable to load todos')
   }
 }
 
@@ -59,32 +45,34 @@ const completedChanged = (ev: { Id: number; Completed: boolean }) => {
 const updateToDo = async (Id: number, Task: string, Completed: boolean) => {
   const { Token } = props.user
   if (!Token) return
-  const result = await fetch(`${apiBaseUrl}/todo/${Id}`, {
-    method: 'PATCH',
-    body: JSON.stringify({ Task, Completed }),
-    headers: buildHeaders(props.user)
-  })
-  if (result.ok) loadToDos()
+  try {
+    await api.toDoUpdate(Id, Task, Completed, props.user)
+    loadToDos()
+  } catch (error) {
+    alert('unable to update todo')
+  }
 }
 
 const addToDo = async (ev: { Task: string; Completed: boolean }) => {
   const { Task, Completed } = ev
   if (!Task) return
-  const result = await fetch(`${apiBaseUrl}/todo`, {
-    method: 'POST',
-    body: JSON.stringify({ Task, Completed }),
-    headers: buildHeaders(props.user)
-  })
-  if (result.ok) loadToDos()
+  try {
+    await api.toDoCreate(Task, Completed, props.user)
+    loadToDos()
+  } catch (error) {
+    alert('unable to create todo')
+  }
 }
 
 const deleteToDo = async (ev: { Id: number }) => {
   const { Id } = ev
-  const result = await fetch(`${apiBaseUrl}/todo/${Id}`, {
-    method: 'DELETE',
-    headers: buildHeaders(props.user)
-  })
-  if (result.ok) loadToDos()
+  if (!Id) return
+  try {
+    await api.toDoDelete(Id, props.user)
+    loadToDos()
+  } catch (error) {
+    alert('unable to delete todo')
+  }
 }
 
 onMounted(async () => {
