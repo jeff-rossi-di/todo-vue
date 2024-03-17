@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { apiBaseUrl, randUserPW } from '@/constants'
+import { randUserPW } from '@/constants'
+import { ToDoApi } from '@/lib/todo-api.class'
 import router from '@/router'
 import { useUserStore } from '@/stores/user'
 import { reactive, ref } from 'vue'
@@ -8,17 +9,18 @@ import { onMounted } from 'vue'
 const userNames = ref<string[]>([])
 const state = reactive({ userNames, UserName: '' })
 const session = useUserStore()
+const api = new ToDoApi()
 
 const loadUsers = async () => {
-  const result = await fetch(`${apiBaseUrl}/user`)
-  if (result.ok) {
-    const users = await result.json()
-    console.log(users)
+  try {
+    const result = await api.userLoad()
     const un: string[] = []
-    for (const user of users) {
+    for (const user of result) {
       if (user.Random) un.push(user.UserName)
     }
     state.userNames = un.sort()
+  } catch (error) {
+    alert('Unable to load users')
   }
 }
 
@@ -26,22 +28,14 @@ const signIn = async () => {
   const { UserName } = state
   const PassWord = randUserPW
   if (!UserName || !PassWord) return
-  const result = await fetch(`${apiBaseUrl}/auth/login`, {
-    method: 'POST',
-    body: JSON.stringify({ UserName, PassWord }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  if (result.ok) {
-    const json = await result.json()
-    console.log(json)
-    const { Token } = json
+  try {
+    const result = await api.login(UserName, PassWord)
+    const { Token } = result
     session.login({ UserName, Token, SignedIn: true })
     const failure = await router.push('/') // no idea why this < 100%
     if (failure) console.log(failure)
-  } else {
-    alert('Unable to Sign in')
+  } catch (error) {
+    alert('Unable to sign in')
   }
 }
 
