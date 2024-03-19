@@ -24,6 +24,7 @@ describe('ToDoApi', () => {
     Completed: false,
     UserId: 2
   }
+  const errorMessage = 'some error message'
 
   afterEach(() => {
     vi.clearAllMocks()
@@ -58,9 +59,19 @@ describe('ToDoApi', () => {
       response = await api.login(UserName, PassWord)
       expect(response).toEqual(expected)
     })
+    it('should reject an error', async () => {
+      const spy = vi.spyOn(axios, 'post')
+      spy.mockRejectedValueOnce(errorMessage)
+      try {
+        response = await api.login(UserName, PassWord)
+      } catch (error) {
+        expect(error).toEqual(errorMessage)
+      }
+    })
   })
 
   describe('register', () => {
+    const Email = 'test.user@example.com'
     it('should return a user after sending credentials', async () => {
       const spy = vi.spyOn(axios, 'post')
       expected = {
@@ -74,9 +85,17 @@ describe('ToDoApi', () => {
         Random: false
       }
       spy.mockResolvedValueOnce({ data: expected })
-      const Email = 'test.user@example.com'
       response = await api.register(UserName, PassWord, Email)
       expect(response).toEqual(expected)
+    })
+    it('should reject an error', async () => {
+      const spy = vi.spyOn(axios, 'post')
+      spy.mockRejectedValueOnce(errorMessage)
+      try {
+        response = await api.register(UserName, PassWord, Email)
+      } catch (error) {
+        expect(error).toEqual(errorMessage)
+      }
     })
   })
 
@@ -99,6 +118,15 @@ describe('ToDoApi', () => {
       response = await api.userLoad()
       expect(response).toEqual(expected)
     })
+    it('should reject an error', async () => {
+      const spy = vi.spyOn(axios, 'get')
+      spy.mockRejectedValueOnce(errorMessage)
+      try {
+        response = await api.userLoad()
+      } catch (error) {
+        expect(error).toEqual(errorMessage)
+      }
+    })
   })
 
   describe('toDoLoad', () => {
@@ -109,26 +137,44 @@ describe('ToDoApi', () => {
       response = await api.toDoLoad(session)
       expect(response).toEqual(expected)
     })
+    it('should reject an error', async () => {
+      const spy = vi.spyOn(axios, 'get')
+      spy.mockRejectedValueOnce(errorMessage)
+      try {
+        response = await api.toDoLoad(session)
+      } catch (error) {
+        expect(error).toEqual(errorMessage)
+      }
+    })
   })
 
   describe('toDoCreate', () => {
+    const Task = todo.Task
+    const Completed = todo.Completed
     it('should return a new todo after sending parameters', async () => {
       const spy = vi.spyOn(axios, 'post')
       expected = todo
       spy.mockResolvedValueOnce({ data: expected })
-      const Task = todo.Task
-      const Completed = todo.Completed
       response = await api.toDoCreate(Task, Completed, session)
       expect(response).toEqual(expected)
+    })
+    it('should reject an error', async () => {
+      const spy = vi.spyOn(axios, 'post')
+      spy.mockRejectedValueOnce(errorMessage)
+      try {
+        response = await api.toDoCreate(Task, Completed, session)
+      } catch (error) {
+        expect(error).toEqual(errorMessage)
+      }
     })
   })
 
   describe('toDoUpdate', () => {
+    const { Id } = todo
+    const Task = 'Updated Task'
+    const Completed = true
     it('should update a todo after sending parameters', async () => {
       const spy = vi.spyOn(axios, 'patch')
-      const { Id } = todo
-      const Task = 'Updated Task'
-      const Completed = true
       expected = {
         ...todo,
         Task,
@@ -138,16 +184,34 @@ describe('ToDoApi', () => {
       response = await api.toDoUpdate(Id, Task, Completed, session)
       expect(response).toEqual(expected)
     })
+    it('should reject an error', async () => {
+      const spy = vi.spyOn(axios, 'patch')
+      spy.mockRejectedValueOnce(errorMessage)
+      try {
+        response = await api.toDoUpdate(Id, Task, Completed, session)
+      } catch (error) {
+        expect(error).toEqual(errorMessage)
+      }
+    })
   })
 
   describe('toDoDelete', () => {
+    const { Id } = todo
     it('should delete a todo by Id', async () => {
       const spy = vi.spyOn(axios, 'delete')
       expected = 204
-      const { Id } = todo
       spy.mockResolvedValueOnce({ status: 204 })
       response = await api.toDoDelete(Id, session)
       expect(response).toEqual(expected)
+    })
+    it('should reject an error', async () => {
+      const spy = vi.spyOn(axios, 'delete')
+      spy.mockRejectedValueOnce(errorMessage)
+      try {
+        response = await api.toDoDelete(Id, session)
+      } catch (error) {
+        expect(error).toEqual(errorMessage)
+      }
     })
   })
 })
